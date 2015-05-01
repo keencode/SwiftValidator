@@ -9,13 +9,25 @@
 import Foundation
 import UIKit
 
-public class ValidationError {
-    public let textField:UITextField
-    public var errorLabel:UILabel?
-    public let errorMessage:String
+public class ValidationError: NSError {
+    /// Default error domain
+    static let Domain = "com.keencode.error.validation"
     
-    public init(textField:UITextField, error:String){
-        self.textField = textField
-        self.errorMessage = error
+    public var textField: UITextField?
+    public var errorLabel: UILabel?
+    public var errorMessage: String?
+    
+    public override init(domain: String, code: Int, userInfo dict: [NSObject : AnyObject]?) {
+        super.init(domain: domain, code: code, userInfo: dict)
     }
+
+//    public init(textField:UITextField, error:String) {
+//        self.textField = textField
+//        self.errorMessage = error
+//    }
+
+    required public init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+
 }

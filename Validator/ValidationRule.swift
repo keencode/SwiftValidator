@@ -9,12 +9,20 @@
 import Foundation
 import UIKit
 
+/// Error codes for the default rules
+enum ValidationErrorCode: Int {
+    case Required
+    case InvalidEmail
+}
+
 public class ValidationRule {
-    public var textField:UITextField
-    public var errorLabel:UILabel?
-    public var rules:[Rule] = []
     
-    public init(textField: UITextField, rules:[Rule], errorLabel:UILabel?){
+    public var textField: UITextField
+    public var errorLabel: UILabel?
+    public var rules: [Rule] = []
+    public var userInfo: [NSObject : AnyObject]?
+    
+    public init(textField: UITextField, rules:[Rule], errorLabel:UILabel?) {
         self.textField = textField
         self.errorLabel = errorLabel
         self.rules = rules
@@ -23,7 +31,13 @@ public class ValidationRule {
     public func validateField() -> ValidationError? {
         for rule in rules {
             if !rule.validate(textField.text) {
-                return ValidationError(textField: self.textField, error: rule.errorMessage())
+                if let regexRule = rule as? RegexRule {
+                    if let code = regexRule.errorCode {
+                        let error = ValidationError(domain: ValidationError.Domain, code: code.rawValue, userInfo: userInfo)
+                        error.textField = textField
+                        return error
+                    }
+                }
             }
         }
         return nil

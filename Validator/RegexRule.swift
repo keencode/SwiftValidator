@@ -12,15 +12,16 @@ public class RegexRule : Rule {
     
     private var REGEX: String = "^(?=.*?[A-Z]).{8,}$"
     
+    var errorCode: ValidationErrorCode?
+    
     public init(regex: String){
         self.REGEX = regex
     }
     
     public func validate(value: String) -> Bool {
-        if let test = NSPredicate(format: "SELF MATCHES %@", self.REGEX) {
-            if test.evaluateWithObject(value) {
-                return true
-            }
+        let test = NSPredicate(format: "SELF MATCHES %@", self.REGEX)
+        if test.evaluateWithObject(value) {
+            return true
         }
         return false
     }
