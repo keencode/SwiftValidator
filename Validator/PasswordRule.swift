@@ -20,10 +20,14 @@ public class PasswordRule : RegexRule {
     
     public init(){
         super.init(regex: "^(?=.*?[A-Z]).{8,}$")
+        
+        errorCode = ValidationErrorCode.InvalidPassword
     }
     
     override public init(regex: String) {
         super.init(regex: regex)
+        
+        errorCode = ValidationErrorCode.InvalidPassword
     }
     
     override public func errorMessage() -> String {

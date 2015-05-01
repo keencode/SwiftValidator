@@ -13,6 +13,7 @@ import UIKit
 enum ValidationErrorCode: Int {
     case Required
     case InvalidEmail
+    case InvalidPassword
 }
 
 public class ValidationRule {
