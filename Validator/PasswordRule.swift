@@ -18,16 +18,26 @@ public class PasswordRule : RegexRule {
     // no length. One uppercase. One lowercae. One number.
     // var PASSWORD_REGEX = "^(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[a-z]).*?$"
     
+    let kDefaultRegex = "^(?=.*?[A-Z]).{8,}$"
+    let kDefaultErrorCode = ValidationErrorCode.InvalidPassword.rawValue
+    
     public init(){
-        super.init(regex: "^(?=.*?[A-Z]).{8,}$")
+        super.init(regex: kDefaultRegex)
         
-        errorCode = ValidationErrorCode.InvalidPassword
+        errorCode = kDefaultErrorCode
+    }
+    
+    /// Initialize with custom error code
+    public init(errorCode: Int) {
+        super.init(regex: kDefaultRegex)
+        
+        self.errorCode = errorCode
     }
     
     override public init(regex: String) {
         super.init(regex: regex)
         
-        errorCode = ValidationErrorCode.InvalidPassword
+        errorCode = kDefaultErrorCode
     }
     
     override public func errorMessage() -> String {

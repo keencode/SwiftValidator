@@ -12,8 +12,8 @@ public class RegexRule : Rule {
     
     private var REGEX: String = "^(?=.*?[A-Z]).{8,}$"
     
-    var errorCode: ValidationErrorCode?
-    
+    var errorCode: Int?
+        
     public init(regex: String){
         self.REGEX = regex
     }

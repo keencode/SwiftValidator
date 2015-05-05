@@ -8,19 +8,33 @@
 
 import Foundation
 
-public class RequiredRule: Rule {
+public class RequiredRule: RegexRule {
     
-    public init(){}
+    let kDefaultRegex = ""
+    let kDefaultErrorCode = ValidationErrorCode.Required.rawValue
+    
+    public init() {
+        super.init(regex: kDefaultRegex)
+        
+        errorCode = kDefaultErrorCode
+    }
+    
+    /// Initialize with custom error code
+    public init(errorCode: Int) {
+        super.init(regex: kDefaultRegex)
+        
+        self.errorCode = errorCode
+    }
     
     var message: String {
         return "This field is required"
     }
     
-    public func validate(value: String) -> Bool {
+    override public func validate(value: String) -> Bool {
         return !value.isEmpty
     }
     
-    public func errorMessage() -> String {
+    override public func errorMessage() -> String {
         return message
     }
 }

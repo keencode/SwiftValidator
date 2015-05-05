@@ -33,8 +33,8 @@ public class ValidationRule {
         for rule in rules {
             if !rule.validate(textField.text) {
                 if let regexRule = rule as? RegexRule {
-                    if let code = regexRule.errorCode {
-                        let error = ValidationError(domain: ValidationError.Domain, code: code.rawValue, userInfo: userInfo)
+                    if let errorCode = regexRule.errorCode {
+                        let error = ValidationError(domain: ValidationError.Domain, code: errorCode, userInfo: userInfo)
                         error.textField = textField
                         return error
                     }
