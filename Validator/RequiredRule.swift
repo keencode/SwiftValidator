@@ -11,12 +11,9 @@ import Foundation
 public class RequiredRule: RegexRule {
     
     let kDefaultRegex = ""
-    let kDefaultErrorCode = ValidationErrorCode.Required.rawValue
     
     public init() {
         super.init(regex: kDefaultRegex)
-        
-        errorCode = kDefaultErrorCode
     }
     
     /// Initialize with custom error code
