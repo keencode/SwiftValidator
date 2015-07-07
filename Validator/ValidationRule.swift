@@ -9,13 +9,6 @@
 import Foundation
 import UIKit
 
-/// Error codes for the default rules
-enum ValidationErrorCode: Int {
-    case Required
-    case InvalidEmail
-    case InvalidPassword
-}
-
 public class ValidationRule {
     
     public var textField: UITextField
